@@ -9,6 +9,21 @@
             {
                 Console.WriteLine(item);
             }
+            string choice = Console.ReadLine();
+            Console.WriteLine(" vásárlás = 1");
+            Console.WriteLine("visszáru = 2");
+            switch(choice){
+                case "1":
+                    Console.WriteLine("mennyit szeretnél venni?");
+                    int ujcount = int.Parse(Console.ReadLine());
+                    
+                    break;
+                case "2":
+
+                    break;
+
+              
+            }
         }
     }
 }
