@@ -9,13 +9,17 @@
             {
                 Console.WriteLine(item);
             }
-            string choice = Console.ReadLine();
             Console.WriteLine(" vásárlás = 1");
             Console.WriteLine("visszáru = 2");
-            switch(choice){
+            string choice = Console.ReadLine();
+            switch (choice){
                 case "1":
-                    Console.WriteLine("mennyit szeretnél venni?");
+                    Console.WriteLine("mit szeretnél venni?");
                     int ujcount = int.Parse(Console.ReadLine());
+                    Console.WriteLine("____________________________");
+                    Console.WriteLine("mennyit szeretnel venni?: ");
+                    int megujabbcount = int.Parse(Console.ReadLine());
+                    ikeabutor[ujcount].buy(megujabbcount);
                     
                     break;
                 case "2":

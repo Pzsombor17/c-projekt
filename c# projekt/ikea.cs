@@ -23,14 +23,16 @@ namespace asztali_projekt_ikea
             this.color = data[2];
             this.name = data[3];
             this.db = int.Parse(data[4]);
-            this.raktaron = Convert.ToBoolean(data[6]);
             this.price = int.Parse(data[5]);
-            this.maxStock = int.Parse(data[6]);
+            if (data[6] == "true") { this.raktaron = true; }
+            else if (data[6] == "false") { this.raktaron = false; }
+            else { this.raktaron = false; }
+                this.maxStock = int.Parse(data[7]);
 
         }
         public double buy(int count)
         {
-            if (raktaron == true && db > count) {
+            if (db > count) {
                 Console.WriteLine("Van raktáron,Ennyibe fog kerülni+ ÁFA:");
                 return (price * count) * 0.27;
             }
@@ -60,7 +62,7 @@ namespace asztali_projekt_ikea
         }
         public override string ToString()
         {
-            return $"A típús: {type}, méret: {size}, szín: {color}, neve: {name}, elérhető darabszám: {db}, raktáron: ,ár: {price}, ennyi fér el a raktárban: {maxStock}";
+            return $"A típús: {type}, méret: {size}, szín: {color}, neve: {name}, elérhető darabszám: {db}, raktáron: ,ár: {price},van-e raktáron: {raktaron}, ennyi fér el a raktárban: {maxStock}";
         }
     }
 }

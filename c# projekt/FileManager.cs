@@ -25,7 +25,7 @@ namespace asztali_projekt_ikea
             {
                 Console.WriteLine(error.Message);
             }
-            return sorok;
+            return  sorok;
         }
     }
 }
