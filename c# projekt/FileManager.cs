@@ -18,6 +18,7 @@ namespace asztali_projekt_ikea
                     string[] temp = sor.Split(";");
 
                     sorok.Add(new Ikea(temp));
+                    
 
                 }
             }

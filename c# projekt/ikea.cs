@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace asztali_projekt_ikea
 {
@@ -23,42 +25,61 @@ namespace asztali_projekt_ikea
             this.color = data[2];
             this.name = data[3];
             this.db = int.Parse(data[4]);
-            this.price = int.Parse(data[5]);
-            if (data[6] == "true") { this.raktaron = true; }
-            else if (data[6] == "false") { this.raktaron = false; }
+            if (data[5] == "True") 
+            { this.raktaron = true; }
+            else if (data[5] == "False") 
+            { this.raktaron = false; }
             else { this.raktaron = false; }
-                this.maxStock = int.Parse(data[7]);
+            this.price = int.Parse(data[6]);
+            this.maxStock = int.Parse(data[7]);
 
         }
-        public double buy(int count)
+        public void buy(int count)
         {
-            if (db > count) {
+            if (raktaron==true && db > count) {
                 Console.WriteLine("Van raktáron,Ennyibe fog kerülni+ ÁFA:");
-                return (price * count) * 0.27;
+                db -= count;
+                Console.WriteLine($"{(price * count) * 0.27} Ft");
+                Console.WriteLine($"ennyi maradt raktáron: {db}");
+                
             }
             else
             {
                 Console.WriteLine("elfogyott a termékből");
-                return 0;
+                
             }
 
         }
         
-        public int Return(int db,string type)
+        public void Return(int visszadb)
         {
-            return 0;
+
+            if (db + visszadb <= maxStock)
+            {
+                db += visszadb;
+                raktaron = true;
+                Console.WriteLine($"\n---  sikeres visszavetel---");
+                Console.WriteLine($"Visszavett mennyiség: {visszadb} db");
+                Console.WriteLine($"jelenlegi darabszam visszavetel utan: {db}");
+            }
+            else
+            {
+                Console.WriteLine($"Nem fér el raktáron, max mennyiség: {maxStock}, jelenlegi: {db}");
+            }
         }
-        public double discount()
+        public void discount()
         {
             Random rnd = new Random();
             double kedvezmeny = 0.10 + rnd.NextDouble() * (0.80 - 0.10);
-            Console.WriteLine($"Ennyi a kedvezmény: {kedvezmeny}");
-            return (price * kedvezmeny);
+            Console.WriteLine($"Ennyi a kedvezmény: {kedvezmeny} %");
+            Console.WriteLine($"Eredeti ár: {price} ft");
+            Console.WriteLine($"Az új ár: {(price * kedvezmeny)} Ft");
         }
         public int ReStock()
         {
-            
+            raktaron = true;
             return db = maxStock;
+            
         }
         public override string ToString()
         {
